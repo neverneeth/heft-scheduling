@@ -1,0 +1,486 @@
+Metadata-Version: 2.4
+Name: heft-scheduling-framework
+Version: 1.0.0
+Summary: A rigorous, extensible framework for DAG-based workflow scheduling algorithms
+Home-page: https://github.com/yourusername/heft-scheduling-framework
+Author: HEFT Scheduling Framework Team
+Author-email: 
+Project-URL: Documentation, https://github.com/yourusername/heft-scheduling-framework
+Project-URL: Source, https://github.com/yourusername/heft-scheduling-framework
+Project-URL: Bug Reports, https://github.com/yourusername/heft-scheduling-framework/issues
+Keywords: scheduling algorithms DAG workflow HEFT Q-learning
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: networkx>=2.6.3
+Requires-Dist: matplotlib>=3.5.0
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: seaborn>=0.11.2
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=3.0.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: flake8>=4.0.0; extra == "dev"
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: project-url
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# HEFT Scheduling Framework
+
+A rigorous, extensible, and well-tested framework for designing, implementing, and evaluating scheduling algorithms for Directed Acyclic Graph (DAG) based workloads in distributed computing systems.
+
+## 🎯 Overview
+
+This framework provides a modular environment for experimenting with workflow scheduling algorithms. It includes implementations of classic algorithms (HEFT) and learning-based approaches (QL-HEFT), along with comprehensive tools for testing, visualization, and comparison.
+
+## ✨ Features
+
+### Core Capabilities
+
+- **DAG Generation**: Create diverse workflow structures with configurable parameters
+  - Random DAGs with adjustable edge probability
+  - Layered DAGs for pipeline-style workflows
+  - Fork-Join patterns for MapReduce-style applications
+
+- **Cost Modeling**: Realistic simulation of heterogeneous computing environments
+  - Per-processor computation costs
+  - Inter-task communication costs
+  - Configurable cost ranges
+
+- **Algorithm Integration**: Extensible algorithm framework
+  - Abstract base class for consistent interfaces
+  - Built-in implementations: HEFT, QL-HEFT (Large State), QL-HEFT (Small State)
+  - Easy integration of custom algorithms
+
+- **Visualization Tools**: Comprehensive visual analysis
+  - DAG structure visualization with NetworkX
+  - Gantt chart generation for schedules
+  - Algorithm comparison charts
+  - Q-learning convergence plots
+
+- **Sanity Checking**: Automated testing and validation
+  - One-line sanity checks for quick testing
+  - Comprehensive comparison across algorithms
+  - Performance metrics (makespan, utilization, execution time)
+
+## 📦 Installation
+
+### Prerequisites
+
+```bash
+# Python 3.8 or higher
+pip install networkx matplotlib numpy pandas seaborn
+```
+
+### Framework Setup
+
+1. Clone or download the repository
+2. Ensure the `src` directory is in your Python path
+
+## 🚀 Quick Start
+
+### Simple Sanity Check
+
+```python
+from src.utils import quick_sanity_check
+
+# Run a quick sanity check with default parameters
+results = quick_sanity_check(
+    num_tasks=9,
+    num_processors=3,
+    random_seed=42
+)
+```
+
+This single command will:
+1. Generate a random DAG
+2. Visualize the DAG structure
+3. Run HEFT and QL-HEFT algorithms
+4. Display Gantt charts for each algorithm
+5. Compare algorithm performance
+
+### Using Individual Components
+
+```python
+from src.core import WorkflowDAG
+from src.algorithms import HEFTAlgorithm
+from src.utils import DAGGenerator, Visualizer
+
+# Generate a DAG
+dag = DAGGenerator.generate_random_dag(
+    num_tasks=10,
+    num_processors=3,
+    random_seed=42
+)
+
+# Visualize the DAG
+Visualizer.visualize_dag(dag, title="My Workflow")
+
+# Run HEFT algorithm
+heft = HEFTAlgorithm()
+result = heft.schedule(dag)
+
+# Display Gantt chart
+Visualizer.visualize_gantt_chart(result)
+
+# Print results
+print(f"Makespan: {result.makespan:.2f}")
+print(f"Average Utilization: {result.get_average_utilization():.2f}%")
+```
+
+## 📚 Framework Architecture
+
+```
+heft_scheduling_framework/
+├── src/
+│   ├── core/                    # Core data structures
+│   │   ├── workflow_dag.py      # DAG representation
+│   │   ├── system_model.py      # System configuration
+│   │   └── schedule_result.py   # Scheduling results
+│   │
+│   ├── algorithms/              # Scheduling algorithms
+│   │   ├── base.py              # Abstract base class
+│   │   ├── heft.py              # HEFT implementation
+│   │   └── qlheft.py            # QL-HEFT variants
+│   │
+│   └── utils/                   # Utilities
+│       ├── dag_generator.py     # DAG generation
+│       ├── visualizer.py        # Visualization tools
+│       └── sanity_checker.py    # Testing utilities
+│
+├── examples/                    # Example scripts
+│   ├── simple_sanity_check.py
+│   ├── custom_algorithm.py
+│   └── advanced_dag_generation.py
+│
+└── tests/                       # Unit tests
+```
+
+## 🔬 Algorithms
+
+### HEFT (Heterogeneous Earliest Finish Time)
+
+Classic list scheduling algorithm:
+- **Phase 1**: Compute upward rank for task prioritization
+- **Phase 2**: Assign tasks to processors using Earliest Finish Time (EFT) heuristic
+
+```python
+from src.algorithms import HEFTAlgorithm
+
+heft = HEFTAlgorithm()
+result = heft.schedule(dag)
+```
+
+### QL-HEFT Large State
+
+Q-learning with full state representation:
+- **State**: Set of all scheduled tasks
+- **Action**: Next task to schedule
+- **Reward**: Upward rank of selected task
+
+```python
+from src.algorithms import QLHEFTLargeState
+
+ql_large = QLHEFTLargeState(
+    num_episodes=10000,
+    epsilon=0.1,
+    learning_rate=0.1,
+    discount_factor=0.9
+)
+result = ql_large.schedule(dag)
+```
+
+### QL-HEFT Small State
+
+Q-learning with compact state representation:
+- **State**: Last scheduled task
+- **Action**: Next task to schedule
+- **Includes**: Convergence detection and learning rate decay
+
+```python
+from src.algorithms import QLHEFTSmallState
+
+ql_small = QLHEFTSmallState(
+    num_episodes=50000,
+    epsilon=0.2,
+    convergence_threshold=0.1,
+    learning_rate_decay="exponential"
+)
+result = ql_small.schedule(dag)
+```
+
+## 🛠️ Creating Custom Algorithms
+
+Extend the `SchedulingAlgorithm` base class:
+
+```python
+from src.algorithms import SchedulingAlgorithm
+from src.core import ScheduleResult
+
+class MyCustomAlgorithm(SchedulingAlgorithm):
+    def __init__(self):
+        super().__init__(name="My-Custom-Algorithm")
+    
+    def schedule(self, dag):
+        # Your scheduling logic here
+        task_schedule = {}
+        processor_schedules = {}
+        makespan = 0.0
+        
+        # ... implement your algorithm ...
+        
+        return ScheduleResult(
+            task_schedule=task_schedule,
+            processor_schedules=processor_schedules,
+            makespan=makespan,
+            algorithm_name=self.name
+        )
+
+# Use your algorithm
+my_algo = MyCustomAlgorithm()
+result = my_algo.schedule(dag)
+```
+
+## 📊 Visualization Examples
+
+### DAG Structure
+```python
+from src.utils import Visualizer
+
+Visualizer.visualize_dag(
+    dag,
+    title="Workflow Structure",
+    figsize=(12, 8),
+    save_path="dag_structure.png"
+)
+```
+
+### Gantt Chart
+```python
+Visualizer.visualize_gantt_chart(
+    result,
+    title=f"Schedule - {result.algorithm_name}",
+    figsize=(14, 6),
+    save_path="gantt_chart.png"
+)
+```
+
+### Algorithm Comparison
+```python
+# Run multiple algorithms
+results = [heft_result, ql_large_result, ql_small_result]
+
+Visualizer.compare_algorithms(
+    results,
+    figsize=(12, 6),
+    save_path="comparison.png"
+)
+```
+
+### Convergence Analysis
+```python
+# For QL-HEFT algorithms
+Visualizer.visualize_convergence(
+    result.metadata['convergence_history'],
+    title="Q-Learning Convergence",
+    window_size=100
+)
+```
+
+## 🧪 Testing
+
+### Running the Sanity Checker
+
+```python
+from src.utils import SanityChecker
+
+checker = SanityChecker()
+summary = checker.run_sanity_check(
+    num_tasks=12,
+    num_processors=4,
+    dag_type="layered",  # or "random", "fork_join"
+    random_seed=42
+)
+
+# Access results
+for result in checker.get_results():
+    print(f"{result.algorithm_name}: {result.makespan:.2f}")
+```
+
+### Custom Algorithm Testing
+
+```python
+from src.algorithms import HEFTAlgorithm
+
+# Create custom algorithm list
+algorithms = [
+    HEFTAlgorithm(),
+    MyCustomAlgorithm(),
+    # ... more algorithms
+]
+
+checker.run_sanity_check(
+    num_tasks=10,
+    num_processors=3,
+    algorithms=algorithms
+)
+```
+
+## 📈 Performance Metrics
+
+The framework automatically collects:
+
+- **Makespan**: Total workflow completion time
+- **Processor Utilization**: Percentage of time each processor is busy
+- **Average Utilization**: Mean utilization across all processors
+- **Execution Time**: Algorithm runtime
+- **Task Order**: Sequence in which tasks were scheduled
+
+Access metrics through `ScheduleResult`:
+
+```python
+print(f"Makespan: {result.makespan:.2f}")
+print(f"Avg Utilization: {result.get_average_utilization():.2f}%")
+
+utilization = result.get_processor_utilization()
+for proc_id, util in utilization.items():
+    print(f"Processor {proc_id}: {util:.2f}%")
+```
+
+## 🎓 Examples
+
+### Example 1: Basic Usage
+```bash
+cd examples
+python simple_sanity_check.py
+```
+
+### Example 2: Custom Algorithms
+```bash
+python custom_algorithm.py
+```
+
+### Example 3: DAG Generation
+```bash
+python advanced_dag_generation.py
+```
+
+## 🔧 Configuration
+
+### DAG Generation Parameters
+
+```python
+dag = DAGGenerator.generate_random_dag(
+    num_tasks=15,                          # Number of tasks
+    num_processors=4,                      # Number of processors
+    edge_probability=0.3,                  # Probability of edge creation
+    computation_cost_range=(10, 50),       # Min/max computation cost
+    communication_cost_range=(1, 20),      # Min/max communication cost
+    random_seed=42                         # For reproducibility
+)
+```
+
+### Algorithm Parameters
+
+```python
+ql_small = QLHEFTSmallState(
+    num_episodes=50000,              # Maximum training episodes
+    epsilon=0.2,                     # Exploration rate
+    learning_rate=0.1,               # Initial learning rate
+    discount_factor=0.9,             # Future reward discount
+    convergence_window=40,           # Window for convergence check
+    convergence_threshold=0.1,       # Threshold for convergence
+    learning_rate_decay="exponential"  # Decay type
+)
+```
+
+## 📝 API Reference
+
+### Core Classes
+
+- **WorkflowDAG**: Represents a workflow as a DAG
+  - `get_predecessors(task)`: Get task predecessors
+  - `get_successors(task)`: Get task successors
+  - `get_viable_tasks(scheduled)`: Get ready-to-schedule tasks
+  - `get_computation_cost(task, processor)`: Get execution time
+  - `get_communication_cost(source, dest)`: Get transfer time
+
+- **ScheduleResult**: Contains scheduling output
+  - `makespan`: Total completion time
+  - `task_schedule`: Per-task scheduling details
+  - `processor_schedules`: Per-processor task lists
+  - `get_processor_utilization()`: Calculate utilization
+  - `get_schedule_summary()`: Generate text summary
+
+- **SchedulingAlgorithm**: Abstract base class
+  - `schedule(dag)`: Main scheduling method (must implement)
+  - `get_name()`: Get algorithm name
+  - `get_config()`: Get configuration parameters
+
+### Utility Classes
+
+- **DAGGenerator**: Create random DAGs
+  - `generate_random_dag()`: General random DAG
+  - `generate_layered_dag()`: Pipeline-style DAG
+  - `generate_fork_join_dag()`: MapReduce-style DAG
+
+- **Visualizer**: Visualization tools
+  - `visualize_dag()`: Show DAG structure
+  - `visualize_gantt_chart()`: Show schedule timeline
+  - `compare_algorithms()`: Compare multiple results
+  - `visualize_convergence()`: Show Q-learning convergence
+
+- **SanityChecker**: Automated testing
+  - `run_sanity_check()`: Comprehensive test
+  - `get_results()`: Access scheduling results
+  - `get_dag()`: Access generated DAG
+
+## 🤝 Contributing
+
+To add new algorithms:
+
+1. Create a new file in `src/algorithms/`
+2. Extend `SchedulingAlgorithm` base class
+3. Implement the `schedule()` method
+4. Add imports to `src/algorithms/__init__.py`
+
+To add new DAG types:
+
+1. Add methods to `DAGGenerator` class
+2. Follow the pattern of existing generators
+3. Document parameters and return types
+
+## 📄 License
+
+This framework is provided for educational and research purposes.
+
+## 🙏 Acknowledgments
+
+Based on:
+- HEFT algorithm by Topcuoglu et al. (2002)
+- Q-learning enhanced HEFT variants
+
+## 📧 Support
+
+For questions or issues, please check the examples directory or review the inline documentation in the source code.
+
+---
+
+**Version**: 1.0.0  
+**Status**: Phase 1 Complete (Algorithm Implementation, DAG Generation, Sanity Checker)
