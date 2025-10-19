@@ -4,6 +4,7 @@ sys.path.append('..')
 from src.core import WorkflowDAG
 from src.algorithms import HEFTAlgorithm, QLHEFTLargeState, QLHEFTSmallState
 from src.utils import Visualizer, SanityChecker
+from src.utils.schedule_validator import validate_schedule
 # E[i] = edge from E[i][0] to E[i][1]
 
 E = [('T1', 'T2'), ('T1', 'T3'), ('T1', 'T4'),
@@ -43,9 +44,9 @@ for i, algo in enumerate(algorithms):
     print("=" * 80)
     
     result = algo.schedule(dag)
-    
+    is_valid = validate_schedule(dag, result, verbose=True)
     print(f"\nResults for {algo.name}:")
     print(f"  Makespan: {result.makespan:.2f}")
     print(f"  Average Processor Utilization: {result.get_average_utilization():.2f}%")
-    
+
     Visualizer.visualize_gantt_chart(result, title=f"Gantt Chart - {algo.name}")

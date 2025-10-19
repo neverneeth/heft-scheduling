@@ -7,6 +7,7 @@ scheduling problems.
 """
 
 import networkx as nx
+import re
 from typing import List, Dict, Tuple, Set, Optional
 import copy
 
@@ -53,8 +54,12 @@ class WorkflowDAG:
         if not nx.is_directed_acyclic_graph(self.graph):
             raise ValueError("The provided graph contains cycles and is not a valid DAG")
         
-        # Build task mapping
-        self.task_list = sorted(self.graph.nodes())
+    # Build task mapping with natural sorting (fix for task ordering)
+        import re
+        def natural_sort_key(s):
+            return [int(text) if text.isdigit() else text.lower() 
+                for text in re.split(r'(\d+)', s)]
+        self.task_list = sorted(self.graph.nodes(), key=natural_sort_key)
         self.task_index = {task: idx for idx, task in enumerate(self.task_list)}
         
         # Store costs
@@ -64,6 +69,7 @@ class WorkflowDAG:
         # Metadata
         self.num_tasks = len(self.task_list)
         self.num_processors = len(computation_costs[0]) if computation_costs else 0
+        self.processor_list = [f'p{i}' for i in range(self.num_processors)]
         
         # Validate computation costs dimensions
         if len(computation_costs) != self.num_tasks:
@@ -150,7 +156,16 @@ class WorkflowDAG:
             Execution time
         """
         task_idx = self.task_index[task]
-        return self.computation_costs[task_idx][processor]
+        if isinstance(processor, str) and processor.startswith('p'):
+            # Format: 'p0', 'p1', etc.
+            processor_idx = int(processor[1:])
+        elif isinstance(processor, int):
+            # Format: 0, 1, 2, etc.
+            processor_idx = processor
+        else:
+            raise ValueError(f"Invalid processor format: {processor}. " 
+                            f"Expected integer or string like 'p0'")
+        return self.computation_costs[task_idx][processor_idx]
     
     def get_communication_cost(self, source: str, dest: str) -> float:
         """

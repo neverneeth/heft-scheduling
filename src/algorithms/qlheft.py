@@ -121,8 +121,8 @@ class QLHEFTLargeState(SchedulingAlgorithm):
                     best_actions = [a for a, v in q_values.items() if v == max_q]
                     action = random.choice(best_actions)
                 
-                # Get reward (upward rank of selected task)
-                reward = upward_ranks[action]
+                # Get reward (upward rank of selected task plus number of successors*total task count)
+                reward = upward_ranks[action] 
                 
                 # Move to next state
                 next_state = scheduled.union({action})

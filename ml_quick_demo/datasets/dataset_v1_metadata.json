@@ -1,0 +1,814 @@
+[
+  {
+    "dag_id": 0,
+    "config": {
+      "type": "fork_join",
+      "num_initial_tasks": 3,
+      "num_parallel_tasks": 10,
+      "num_final_tasks": 2,
+      "num_processors": 3,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 134.57681530710522,
+    "expert_algorithm": "QL-HEFT-LargeState",
+    "dag_info": {
+      "dag_id": 0,
+      "type": "fork_join",
+      "num_tasks": 15,
+      "num_processors": 3,
+      "num_edges": 15,
+      "config": {
+        "num_initial_tasks": 3,
+        "num_parallel_tasks": 10,
+        "num_final_tasks": 2,
+        "num_processors": 3,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 0
+      }
+    }
+  },
+  {
+    "dag_id": 1,
+    "config": {
+      "type": "random",
+      "num_tasks": 25,
+      "num_processors": 4,
+      "edge_probability": 0.4,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 274.3749843739044,
+    "expert_algorithm": "QL-HEFT-LargeState",
+    "dag_info": {
+      "dag_id": 1,
+      "type": "random",
+      "num_tasks": 25,
+      "num_processors": 4,
+      "num_edges": 46,
+      "config": {
+        "num_tasks": 25,
+        "num_processors": 4,
+        "edge_probability": 0.4,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 42
+      }
+    }
+  },
+  {
+    "dag_id": 2,
+    "config": {
+      "type": "fork_join",
+      "num_initial_tasks": 2,
+      "num_parallel_tasks": 6,
+      "num_final_tasks": 2,
+      "num_processors": 3,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 97.54814557989648,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 2,
+      "type": "fork_join",
+      "num_tasks": 10,
+      "num_processors": 3,
+      "num_edges": 11,
+      "config": {
+        "num_initial_tasks": 2,
+        "num_parallel_tasks": 6,
+        "num_final_tasks": 2,
+        "num_processors": 3,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 84
+      }
+    }
+  },
+  {
+    "dag_id": 3,
+    "config": {
+      "type": "layered",
+      "num_layers": 5,
+      "tasks_per_layer": 3,
+      "num_processors": 4,
+      "edge_density": 0.5,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 166.56225467522833,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 3,
+      "type": "layered",
+      "num_tasks": 15,
+      "num_processors": 4,
+      "num_edges": 20,
+      "config": {
+        "num_layers": 5,
+        "tasks_per_layer": 3,
+        "num_processors": 4,
+        "edge_density": 0.5,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 126
+      }
+    }
+  },
+  {
+    "dag_id": 4,
+    "config": {
+      "type": "layered",
+      "num_layers": 5,
+      "tasks_per_layer": 3,
+      "num_processors": 3,
+      "edge_density": 0.5,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 140.4424390063971,
+    "expert_algorithm": "QL-HEFT-LargeState",
+    "dag_info": {
+      "dag_id": 4,
+      "type": "layered",
+      "num_tasks": 14,
+      "num_processors": 3,
+      "num_edges": 19,
+      "config": {
+        "num_layers": 5,
+        "tasks_per_layer": 3,
+        "num_processors": 3,
+        "edge_density": 0.5,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 168
+      }
+    }
+  },
+  {
+    "dag_id": 5,
+    "config": {
+      "type": "random",
+      "num_tasks": 20,
+      "num_processors": 3,
+      "edge_probability": 0.4,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 245.5138311347502,
+    "expert_algorithm": "QL-HEFT-SmallState",
+    "dag_info": {
+      "dag_id": 5,
+      "type": "random",
+      "num_tasks": 20,
+      "num_processors": 3,
+      "num_edges": 30,
+      "config": {
+        "num_tasks": 20,
+        "num_processors": 3,
+        "edge_probability": 0.4,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 210
+      }
+    }
+  },
+  {
+    "dag_id": 6,
+    "config": {
+      "type": "random",
+      "num_tasks": 40,
+      "num_processors": 3,
+      "edge_probability": 0.2,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 451.8730571621704,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 6,
+      "type": "random",
+      "num_tasks": 40,
+      "num_processors": 3,
+      "num_edges": 57,
+      "config": {
+        "num_tasks": 40,
+        "num_processors": 3,
+        "edge_probability": 0.2,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 252
+      }
+    }
+  },
+  {
+    "dag_id": 7,
+    "config": {
+      "type": "gaussian_elimination",
+      "chi": 6,
+      "num_processors": 4,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 243.3202898541921,
+    "expert_algorithm": "QL-HEFT-LargeState",
+    "dag_info": {
+      "dag_id": 7,
+      "type": "gaussian_elimination",
+      "num_tasks": 20,
+      "num_processors": 4,
+      "num_edges": 29,
+      "config": {
+        "chi": 6,
+        "num_processors": 4,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 294
+      }
+    }
+  },
+  {
+    "dag_id": 8,
+    "config": {
+      "type": "random",
+      "num_tasks": 25,
+      "num_processors": 3,
+      "edge_probability": 0.4,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 241.4177158614811,
+    "expert_algorithm": "QL-HEFT-SmallState",
+    "dag_info": {
+      "dag_id": 8,
+      "type": "random",
+      "num_tasks": 25,
+      "num_processors": 3,
+      "num_edges": 41,
+      "config": {
+        "num_tasks": 25,
+        "num_processors": 3,
+        "edge_probability": 0.4,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 336
+      }
+    }
+  },
+  {
+    "dag_id": 9,
+    "config": {
+      "type": "random",
+      "num_tasks": 15,
+      "num_processors": 6,
+      "edge_probability": 0.3,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 143.35498631653184,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 9,
+      "type": "random",
+      "num_tasks": 15,
+      "num_processors": 6,
+      "num_edges": 16,
+      "config": {
+        "num_tasks": 15,
+        "num_processors": 6,
+        "edge_probability": 0.3,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 378
+      }
+    }
+  },
+  {
+    "dag_id": 10,
+    "config": {
+      "type": "gaussian_elimination",
+      "chi": 4,
+      "num_processors": 5,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 143.1158687250925,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 10,
+      "type": "gaussian_elimination",
+      "num_tasks": 9,
+      "num_processors": 5,
+      "num_edges": 11,
+      "config": {
+        "chi": 4,
+        "num_processors": 5,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 420
+      }
+    }
+  },
+  {
+    "dag_id": 11,
+    "config": {
+      "type": "fork_join",
+      "num_initial_tasks": 3,
+      "num_parallel_tasks": 8,
+      "num_final_tasks": 3,
+      "num_processors": 4,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 85.43107599250293,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 11,
+      "type": "fork_join",
+      "num_tasks": 14,
+      "num_processors": 4,
+      "num_edges": 15,
+      "config": {
+        "num_initial_tasks": 3,
+        "num_parallel_tasks": 8,
+        "num_final_tasks": 3,
+        "num_processors": 4,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 462
+      }
+    }
+  },
+  {
+    "dag_id": 12,
+    "config": {
+      "type": "random",
+      "num_tasks": 20,
+      "num_processors": 5,
+      "edge_probability": 0.2,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 185.73601417686652,
+    "expert_algorithm": "QL-HEFT-SmallState",
+    "dag_info": {
+      "dag_id": 12,
+      "type": "random",
+      "num_tasks": 20,
+      "num_processors": 5,
+      "num_edges": 26,
+      "config": {
+        "num_tasks": 20,
+        "num_processors": 5,
+        "edge_probability": 0.2,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 504
+      }
+    }
+  },
+  {
+    "dag_id": 13,
+    "config": {
+      "type": "fork_join",
+      "num_initial_tasks": 3,
+      "num_parallel_tasks": 10,
+      "num_final_tasks": 2,
+      "num_processors": 3,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 134.53864376233406,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 13,
+      "type": "fork_join",
+      "num_tasks": 15,
+      "num_processors": 3,
+      "num_edges": 14,
+      "config": {
+        "num_initial_tasks": 3,
+        "num_parallel_tasks": 10,
+        "num_final_tasks": 2,
+        "num_processors": 3,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 546
+      }
+    }
+  },
+  {
+    "dag_id": 14,
+    "config": {
+      "type": "random",
+      "num_tasks": 15,
+      "num_processors": 5,
+      "edge_probability": 0.4,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 161.29977014433626,
+    "expert_algorithm": "QL-HEFT-SmallState",
+    "dag_info": {
+      "dag_id": 14,
+      "type": "random",
+      "num_tasks": 15,
+      "num_processors": 5,
+      "num_edges": 21,
+      "config": {
+        "num_tasks": 15,
+        "num_processors": 5,
+        "edge_probability": 0.4,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 588
+      }
+    }
+  },
+  {
+    "dag_id": 15,
+    "config": {
+      "type": "layered",
+      "num_layers": 5,
+      "tasks_per_layer": 6,
+      "num_processors": 4,
+      "edge_density": 0.5,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 206.1634289708249,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 15,
+      "type": "layered",
+      "num_tasks": 30,
+      "num_processors": 4,
+      "num_edges": 69,
+      "config": {
+        "num_layers": 5,
+        "tasks_per_layer": 6,
+        "num_processors": 4,
+        "edge_density": 0.5,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 630
+      }
+    }
+  },
+  {
+    "dag_id": 16,
+    "config": {
+      "type": "layered",
+      "num_layers": 4,
+      "tasks_per_layer": 6,
+      "num_processors": 5,
+      "edge_density": 0.5,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 147.8339345491327,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 16,
+      "type": "layered",
+      "num_tasks": 24,
+      "num_processors": 5,
+      "num_edges": 57,
+      "config": {
+        "num_layers": 4,
+        "tasks_per_layer": 6,
+        "num_processors": 5,
+        "edge_density": 0.5,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 672
+      }
+    }
+  },
+  {
+    "dag_id": 17,
+    "config": {
+      "type": "random",
+      "num_tasks": 50,
+      "num_processors": 6,
+      "edge_probability": 0.2,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 437.85618828504164,
+    "expert_algorithm": "QL-HEFT-LargeState",
+    "dag_info": {
+      "dag_id": 17,
+      "type": "random",
+      "num_tasks": 50,
+      "num_processors": 6,
+      "num_edges": 73,
+      "config": {
+        "num_tasks": 50,
+        "num_processors": 6,
+        "edge_probability": 0.2,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 714
+      }
+    }
+  },
+  {
+    "dag_id": 18,
+    "config": {
+      "type": "random",
+      "num_tasks": 30,
+      "num_processors": 6,
+      "edge_probability": 0.2,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 254.43929054344187,
+    "expert_algorithm": "QL-HEFT-LargeState",
+    "dag_info": {
+      "dag_id": 18,
+      "type": "random",
+      "num_tasks": 30,
+      "num_processors": 6,
+      "num_edges": 39,
+      "config": {
+        "num_tasks": 30,
+        "num_processors": 6,
+        "edge_probability": 0.2,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 756
+      }
+    }
+  },
+  {
+    "dag_id": 19,
+    "config": {
+      "type": "random",
+      "num_tasks": 40,
+      "num_processors": 6,
+      "edge_probability": 0.3,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 350.8455696229349,
+    "expert_algorithm": "QL-HEFT-LargeState",
+    "dag_info": {
+      "dag_id": 19,
+      "type": "random",
+      "num_tasks": 40,
+      "num_processors": 6,
+      "num_edges": 64,
+      "config": {
+        "num_tasks": 40,
+        "num_processors": 6,
+        "edge_probability": 0.3,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 798
+      }
+    }
+  }
+]

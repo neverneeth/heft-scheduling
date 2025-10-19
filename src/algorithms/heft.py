@@ -96,6 +96,7 @@ class HEFTAlgorithm(SchedulingAlgorithm):
             if not successors:
                 # Exit task: rank is just the average computation cost
                 rank[task] = w_avg
+                print(f"Task {task} is an exit task with rank {rank[task]:.2f}")
             else:
                 # Rank is avg computation cost + max{comm_cost + successor_rank}
                 max_successor_cost = max(
@@ -103,22 +104,19 @@ class HEFTAlgorithm(SchedulingAlgorithm):
                     for succ in successors
                 )
                 rank[task] = w_avg + max_successor_cost
-        
+                print(f"Task {task} has successors {successors} with rank {rank[task]:.2f}")
         return rank
     
-    def _eft_scheduler(
-        self,
-        dag: WorkflowDAG,
-        task_order: List[str]
-    ) -> Tuple[Dict, Dict, float]:
+    def _eft_scheduler(self, dag: WorkflowDAG, task_order: List[str]) -> Tuple[Dict, Dict, float]:
         """
-        Schedule tasks using Earliest Finish Time (EFT) heuristic.
+        Schedule tasks using Earliest Finish Time (EFT) heuristic with insertion-based approach.
         
-        For each task in the given order, find the processor that allows
+        For each task in the given order, find the processor and time slot that allows
         the earliest finish time considering:
-        - Processor availability
+        - Processor availability and existing schedule
         - Data arrival time from predecessors
         - Task execution time on that processor
+        - Insertion into idle time slots between existing tasks
         
         Args:
             dag: The workflow DAG
@@ -128,22 +126,20 @@ class HEFTAlgorithm(SchedulingAlgorithm):
             Tuple of (task_schedule, processor_schedules, makespan)
         """
         num_processors = dag.num_processors
-        processor_avail = [0.0] * num_processors
         task_schedule = {}
         processor_schedules = defaultdict(list)
         
         for task in task_order:
-            task_idx = dag.task_index[task]
             best_processor = 0
             best_eft = float('inf')
             best_est = 0.0
             
             # Try each processor to find the one with earliest finish time
             for proc in range(num_processors):
-                # Calculate earliest start time (EST) on this processor
-                est = processor_avail[proc]
+                execution_time = dag.get_computation_cost(task, proc)
                 
-                # Consider data arrival times from all predecessors
+                # Calculate data ready time (when all predecessor data is available)
+                data_ready_time = 0.0
                 for pred in dag.get_predecessors(task):
                     if pred in task_schedule:
                         pred_finish_time = task_schedule[pred]['finish_time']
@@ -155,12 +151,14 @@ class HEFTAlgorithm(SchedulingAlgorithm):
                         else:
                             comm_delay = 0
                         
-                        # EST must be after data arrives
-                        est = max(est, pred_finish_time + comm_delay)
+                        data_ready_time = max(data_ready_time, pred_finish_time + comm_delay)
                 
-                # Calculate earliest finish time (EFT) on this processor
-                execution_time = dag.get_computation_cost(task, proc)
-                eft = est + execution_time
+                # Find earliest available time slot on this processor (insertion-based)
+                est, eft = self._find_earliest_slot(
+                    processor_schedules[proc], 
+                    data_ready_time, 
+                    execution_time
+                )
                 
                 # Keep track of best processor
                 if eft < best_eft:
@@ -176,18 +174,62 @@ class HEFTAlgorithm(SchedulingAlgorithm):
                 'execution_time': dag.get_computation_cost(task, best_processor)
             }
             
-            # Update processor availability
-            processor_avail[best_processor] = best_eft
-            
-            # Record in processor schedule
+            # Insert task into processor schedule in sorted order
             processor_schedules[best_processor].append({
                 'task': task,
                 'start': best_est,
                 'finish': best_eft,
                 'duration': dag.get_computation_cost(task, best_processor)
             })
+            # Keep processor schedule sorted by start time
+            processor_schedules[best_processor].sort(key=lambda x: x['start'])
         
         # Calculate makespan
         makespan = max(info['finish_time'] for info in task_schedule.values())
         
         return task_schedule, dict(processor_schedules), makespan
+    
+    def _find_earliest_slot(self, processor_schedule: List[Dict], data_ready_time: float, 
+                           execution_time: float) -> Tuple[float, float]:
+        """
+        Find the earliest available time slot on a processor using insertion-based approach.
+        
+        This method searches for idle time slots between already scheduled tasks
+        and can insert the new task into such slots if they are large enough.
+        
+        Args:
+            processor_schedule: List of already scheduled tasks on this processor
+            data_ready_time: Earliest time when task can start (data dependencies met)
+            execution_time: Required execution time for the task
+            
+        Returns:
+            Tuple of (earliest_start_time, earliest_finish_time)
+        """
+        if not processor_schedule:
+            # Empty processor - can start as soon as data is ready
+            return data_ready_time, data_ready_time + execution_time
+        
+        # Sort schedule by start time (should already be sorted)
+        schedule = sorted(processor_schedule, key=lambda x: x['start'])
+        
+        # Try to insert before the first task
+        if data_ready_time + execution_time <= schedule[0]['start']:
+            return data_ready_time, data_ready_time + execution_time
+        
+        # Try to insert between consecutive tasks
+        for i in range(len(schedule) - 1):
+            current_task = schedule[i]
+            next_task = schedule[i + 1]
+            
+            # Available slot starts after current task finishes and data is ready
+            slot_start = max(current_task['finish'], data_ready_time)
+            slot_end = next_task['start']
+            
+            # Check if task fits in this slot
+            if slot_start + execution_time <= slot_end:
+                return slot_start, slot_start + execution_time
+        
+        # If no slot found, append after the last task
+        last_task = schedule[-1]
+        est = max(last_task['finish'], data_ready_time)
+        return est, est + execution_time

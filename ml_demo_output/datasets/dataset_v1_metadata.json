@@ -1,0 +1,206 @@
+[
+  {
+    "dag_id": 0,
+    "config": {
+      "type": "layered",
+      "num_layers": 4,
+      "tasks_per_layer": 3,
+      "num_processors": 4,
+      "edge_density": 0.5,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 135.10661275477253,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 0,
+      "type": "layered",
+      "num_tasks": 12,
+      "num_processors": 4,
+      "num_edges": 13,
+      "config": {
+        "num_layers": 4,
+        "tasks_per_layer": 3,
+        "num_processors": 4,
+        "edge_density": 0.5,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 0
+      }
+    }
+  },
+  {
+    "dag_id": 1,
+    "config": {
+      "type": "random",
+      "num_tasks": 15,
+      "num_processors": 5,
+      "edge_probability": 0.2,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 156.90106420552144,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 1,
+      "type": "random",
+      "num_tasks": 15,
+      "num_processors": 5,
+      "num_edges": 20,
+      "config": {
+        "num_tasks": 15,
+        "num_processors": 5,
+        "edge_probability": 0.2,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 42
+      }
+    }
+  },
+  {
+    "dag_id": 2,
+    "config": {
+      "type": "layered",
+      "num_layers": 3,
+      "tasks_per_layer": 3,
+      "num_processors": 4,
+      "edge_density": 0.5,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 79.15646624398259,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 2,
+      "type": "layered",
+      "num_tasks": 9,
+      "num_processors": 4,
+      "num_edges": 8,
+      "config": {
+        "num_layers": 3,
+        "tasks_per_layer": 3,
+        "num_processors": 4,
+        "edge_density": 0.5,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 84
+      }
+    }
+  },
+  {
+    "dag_id": 3,
+    "config": {
+      "type": "random",
+      "num_tasks": 10,
+      "num_processors": 6,
+      "edge_probability": 0.2,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 90.0302259580827,
+    "expert_algorithm": "HEFT",
+    "dag_info": {
+      "dag_id": 3,
+      "type": "random",
+      "num_tasks": 10,
+      "num_processors": 6,
+      "num_edges": 10,
+      "config": {
+        "num_tasks": 10,
+        "num_processors": 6,
+        "edge_probability": 0.2,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 126
+      }
+    }
+  },
+  {
+    "dag_id": 4,
+    "config": {
+      "type": "random",
+      "num_tasks": 20,
+      "num_processors": 3,
+      "edge_probability": 0.4,
+      "computation_cost_range": [
+        10,
+        50
+      ],
+      "communication_cost_range": [
+        5,
+        20
+      ]
+    },
+    "expert_makespan": 211.1373511485211,
+    "expert_algorithm": "QL-HEFT-LargeState",
+    "dag_info": {
+      "dag_id": 4,
+      "type": "random",
+      "num_tasks": 20,
+      "num_processors": 3,
+      "num_edges": 35,
+      "config": {
+        "num_tasks": 20,
+        "num_processors": 3,
+        "edge_probability": 0.4,
+        "computation_cost_range": [
+          10,
+          50
+        ],
+        "communication_cost_range": [
+          5,
+          20
+        ],
+        "random_seed": 168
+      }
+    }
+  }
+]

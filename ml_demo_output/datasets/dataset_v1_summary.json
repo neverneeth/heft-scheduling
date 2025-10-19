@@ -1,0 +1,24 @@
+{
+  "total_tasks": 66,
+  "total_dags": 5,
+  "dag_types": {
+    "random": 45,
+    "layered": 21
+  },
+  "expert_algorithms": {
+    "HEFT": 46,
+    "QL-HEFT-LargeState": 20
+  },
+  "makespan_stats": {
+    "mean": 148.64019386192706,
+    "std": 49.48078039955386,
+    "min": 79.15646624398259,
+    "max": 211.1373511485211
+  },
+  "upward_rank_stats": {
+    "mean": 112.22201652270583,
+    "std": 69.32625451857295,
+    "min": 22.79223539081276,
+    "max": 264.7578807144123
+  }
+}
