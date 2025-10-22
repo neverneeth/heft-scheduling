@@ -20,7 +20,7 @@ from src.utils.schedule_validator import validate_schedule
 
 # Step 1: Load your trained model
 ml_heft = RegressionHEFT()
-ml_heft.load_model("examples/models/smart_xgboost_model.joblib")
+ml_heft.load_model("models/smart_xgboost_model.joblib")
 
 # Step 2: Create a DAG to schedule
 dag_generator = DAGGenerator()

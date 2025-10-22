@@ -25,7 +25,7 @@ from src.utils.schedule_validator import validate_schedule
 class MLPipelineDemo:
     """Demonstrates the complete ML pipeline for HEFT scheduling."""
     
-    def __init__(self, output_dir: str = "ml_demo_output"):
+    def __init__(self, output_dir: str = "ml_final_output"):
         """Initialize the demo."""
         self.output_dir = output_dir
         os.makedirs(output_dir, exist_ok=True)
@@ -48,8 +48,8 @@ class MLPipelineDemo:
         dataset_start = time.time()
         
         dataset_df = self.dataset_generator.generate_dataset_v1(
-            num_dags=5,  # Smaller dataset for demo
-            ql_runs_per_dag=3,  # Fewer runs for speed
+            num_dags=2500,  # Smaller dataset for demo
+            ql_runs_per_dag=10,  # Fewer runs for speed
             save_intermediate=False
         )
         
