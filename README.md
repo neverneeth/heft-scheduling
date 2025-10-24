@@ -2,14 +2,9 @@
 
 > A rigorous, extensible, and intuitive framework for DAG-based workflow scheduling algorithms
 
-[![Status](https://img.shields.io/badge/status-production_ready-brightgreen)]()
-[![Phase](https://img.shields.io/badge/phase-1_complete-blue)]()
-[![Tests](https://img.shields.io/badge/tests-passing-success)]()
-[![Python](https://img.shields.io/badge/python-3.8+-blue)]()
-
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ```python
 from src.utils import quick_sanity_check
@@ -19,14 +14,14 @@ quick_sanity_check(num_tasks=9, num_processors=3, random_seed=42)
 ```
 
 **That's it!** The framework will:
-- ✅ Generate a random workflow DAG
-- ✅ Run HEFT and QL-HEFT algorithms
-- ✅ Show DAG structure and Gantt charts
-- ✅ Compare algorithm performance
+- Generate a random workflow DAG
+- Run HEFT and QL-HEFT algorithms
+- Show DAG structure and Gantt charts
+- Compare algorithm performance
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | Document | Purpose | Read Time |
 |----------|---------|-----------|
@@ -37,7 +32,7 @@ quick_sanity_check(num_tasks=9, num_processors=3, random_seed=42)
 | **[PHASE1_SUMMARY.md](PHASE1_SUMMARY.md)** | Project status & deliverables | 15 min |
 | **[INDEX.md](INDEX.md)** | Documentation navigator | 5 min |
 
-### 🎯 Where to Start?
+### Where to Start?
 
 - **New user?** → [GETTING_STARTED.md](GETTING_STARTED.md)
 - **Want details?** → [FRAMEWORK_README.md](FRAMEWORK_README.md)
@@ -46,16 +41,16 @@ quick_sanity_check(num_tasks=9, num_processors=3, random_seed=42)
 
 ---
 
-## ✨ Features
+## Features
 
-### 🔧 Core Capabilities
+### Core Capabilities
 
 - **3 DAG Types**: Random, Layered, Fork-Join patterns
 - **3 Algorithms**: HEFT, QL-HEFT (Large State), QL-HEFT (Small State)
 - **4 Visualizations**: DAG structure, Gantt charts, comparisons, convergence
 - **1-Line Testing**: Complete sanity check in a single function call
 
-### 🎨 Highlights
+### Highlights
 
 ```python
 # Generate different DAG types
@@ -89,7 +84,7 @@ Visualizer.compare_algorithms([result1, result2])
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### Prerequisites
 
@@ -113,7 +108,7 @@ Expected output: `ALL TESTS PASSED! ✓`
 
 ---
 
-## 📖 Examples
+## Examples
 
 ### Example 1: Simple Usage
 
@@ -135,7 +130,7 @@ python examples/advanced_dag_generation.py
 
 ---
 
-## 🏗️ Framework Structure
+##  Framework Structure
 
 ```
 heft_scheduling_framework/
@@ -151,9 +146,9 @@ heft_scheduling_framework/
 
 ---
 
-## 🎓 What You Can Do
+##  What You Can Do
 
-### ✅ Implemented (Phase 1)
+###  Implemented (Phase 1)
 
 - Generate random DAGs with various structures
 - Run HEFT scheduling algorithm
@@ -164,7 +159,7 @@ heft_scheduling_framework/
 - One-line sanity checking
 - Comprehensive testing
 
-### 🚀 Coming Soon (Phase 2+)
+###  Coming Soon (Phase 2+)
 
 - Batch experiment orchestration
 - Statistical analysis tools
@@ -175,7 +170,7 @@ heft_scheduling_framework/
 
 ---
 
-## 🔬 Algorithms
+##  Algorithms
 
 ### HEFT (Heterogeneous Earliest Finish Time)
 
@@ -201,7 +196,7 @@ Q-learning with compact state:
 
 ---
 
-## 📊 Performance
+##  Performance
 
 **Test Configuration:** 6 tasks, 3 processors
 
@@ -215,7 +210,7 @@ Q-learning with compact state:
 
 ---
 
-## 🛠️ Extension Guide
+##  Extension Guide
 
 ### Add a Custom Algorithm
 
@@ -240,7 +235,7 @@ See `examples/custom_algorithm.py` for a complete example.
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ### Run All Tests
 
@@ -258,15 +253,15 @@ python examples/simple_sanity_check.py
 
 ## 📈 Project Status
 
-**Phase 1: COMPLETE ✅**
+**Phase 1: COMPLETE**
 
-- ✅ Algorithm implementations (HEFT, QL-HEFT variants)
-- ✅ Randomized DAG generation (3 types)
-- ✅ Comprehensive sanity checker
-- ✅ Rich visualization tools
-- ✅ Extensive documentation (11,000+ words)
-- ✅ Automated testing
-- ✅ Working examples
+- Algorithm implementations (HEFT, QL-HEFT variants)
+- Randomized DAG generation (3 types)
+- Comprehensive sanity checker
+- Rich visualization tools
+- Extensive documentation (11,000+ words)
+- Automated testing
+- Working examples
 
 **Statistics:**
 - 2,500+ lines of code
@@ -277,16 +272,7 @@ python examples/simple_sanity_check.py
 
 ---
 
-## 🎯 Design Principles
-
-✅ **Rigorous**: Type hints, validation, comprehensive testing  
-✅ **Testable**: Unit tests, integration tests, automated validation  
-✅ **Extensible**: Abstract base classes, plugin architecture  
-✅ **Intuitive**: Clear APIs, extensive docs, working examples  
-
----
-
-## 📝 Citation
+## Citation
 
 If you use this framework in your research, please cite:
 
@@ -300,24 +286,13 @@ A modular framework for DAG-based workflow scheduling
 
 ---
 
-## 🤝 Contributing
-
-We welcome contributions! To add:
-
-- **New algorithms**: Extend `SchedulingAlgorithm` base class
-- **New DAG types**: Add methods to `DAGGenerator`
-- **New visualizations**: Extend `Visualizer` class
-- **Improvements**: Optimize, document, test
-
----
-
-## 📄 License
+##  License
 
 This framework is provided for educational and research purposes.
 
 ---
 
-## 🔗 Quick Links
+##  Quick Links
 
 - **[Get Started in 5 Minutes](GETTING_STARTED.md)**
 - **[Read the Complete Guide](FRAMEWORK_README.md)**
@@ -328,31 +303,3 @@ This framework is provided for educational and research purposes.
 
 ---
 
-## 📞 Support
-
-- 📖 Check [documentation](INDEX.md) for comprehensive guides
-- 💡 Review [examples](examples/) for working code
-- 🧪 Run [tests](test_framework.py) to verify setup
-- 📚 Read inline docstrings for API details
-
----
-
-## ⭐ Acknowledgments
-
-Framework implementation based on:
-- HEFT algorithm (Topcuoglu et al., 2002)
-- Q-learning enhanced scheduling concepts
-- NetworkX for graph operations
-- Matplotlib for visualization
-
----
-
-<div align="center">
-
-**HEFT Scheduling Framework v1.0.0**
-
-*Rigorous • Testable • Extensible • Intuitive*
-
-[Documentation](INDEX.md) • [Examples](examples/) • [Tests](test_framework.py)
-
-</div>
